@@ -8,6 +8,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from Lenet5 import Lenet5
+from MyNet import MYCNN;
 from dataset import CatDogDataset
 from torch.utils.data import Dataset, DataLoader, ConcatDataset
 from torchvision import transforms, models
@@ -21,7 +22,7 @@ cat_train_dir = cPath+'/dataset/A/cat'
 dog_train_dir = cPath+'/dataset/A/dog'
 cat_train_file = os.listdir(cat_train_dir)
 dog_train_file = os.listdir(dog_train_dir)
-test_dir = cPath+'dataset/B'
+test_dir = cPath+'/dataset/B'
 test_file = os.listdir(test_dir)
 
 # 训练集转换
@@ -44,7 +45,7 @@ train_loader = DataLoader(train_set,batch_size=batch_size,shuffle=True,num_worke
 
 # 测试集转换
 
-test_set = CatDogDataset(test_file, test_dir, mode='test',transform=test_transform)
+test_set = CatDogDataset(test_file, test_dir, mode='test')
 test_loader = DataLoader(test_set,batch_size=batch_size,shuffle=True,num_workers=0)
 
 def get_val_dataset():
@@ -157,7 +158,7 @@ def test(model, test_loader,epoch):
 if __name__ == '__main__':
 
     # 模型
-    model =Lenet5()
+    model =MYCNN()
     optimizer = torch.optim.SGD(model.parameters(),lr=1e-3,momentum=0.9,weight_decay=5e-4)
 
     scheduler = StepLR(optimizer,step_size =5)
