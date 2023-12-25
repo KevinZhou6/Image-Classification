@@ -2,4 +2,4 @@
 <br/>
 
 
- Using three layer net to tran and test
+Three layer CNN  to trian and test
